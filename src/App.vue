@@ -1,17 +1,16 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <qrGenerate msg="QR GENERATOR"/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import qrGenerate from './components/qr.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    qrGenerate
   }
 }
 </script>
