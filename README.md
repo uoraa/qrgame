@@ -2,7 +2,7 @@
 
 ## Project setup
 ```
-npm install
+npm installgit ad
 ```
 
 ### Compiles and hot-reloads for development
@@ -19,3 +19,4 @@ npm run build
 ```
 npm run lint
 ```# qrgame
+
