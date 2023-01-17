@@ -1,49 +1,59 @@
 <template>
-    <div class="hello">
-        <h1>{{ msg }}</h1>
-        <qrcode-vue :value="value" :size="size" level="L" type="svg" :margin="margin" :background="background" :foreground="foreground" />
-    </div>
+  <div>
+    <h1>{{ msg }}</h1>
+    <span v-for="team in qrGenerator.teams" :key="team.id" class="qrs">
+      {{ team.name }}
+      <br />
+      <vue-qr
+        :text="team.value"
+        :qid="team.id"
+        :size="qrGenerator.size"
+        :margin="qrGenerator.margin"
+        :colorLight="qrGenerator.colorLight"
+        :colorDark="team.colorDark"
+      ></vue-qr>
+      <br />
+    </span>
+  </div>
 </template>
 
 <script>
-import QrcodeVue from 'qrcode.vue'
+import VueQr from "vue-qr";
 export default {
-    data() {
-        return {
-            value: 'https://example.com',
-            size: 1000,
-            margin: 30,
-            background: "#ff0000",
-            foreground: "#ffffff",
-        }
-    },
-    components: {
-        QrcodeVue,
-    },
-    name: 'qrGenerate',
-    props: {
-        msg: String
-    }
-}
+  components: { VueQr },
+  name: "qrGenerate",
+  props: {
+    msg: String,
+  },
+  data() {
+    return {
+      qrGenerator: {
+        teams: [
+          {
+            id: 0,
+            name: "red",
+            value: "1 Point!",
+            colorDark: "#ff0000",
+          },
+          {
+            id: 1,
+            name: "Blue",
+            value: "1 point!",
+            colorDark: "#0084ff",
+          },
+        ],
+        size: 500,
+        margin: 30,
+        colorLight: "#ffffff",
+      },
+    };
+  },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-    margin: 40px 0 0;
-}
-
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-li {
-    display: inline-block;
-    margin: 0 10px;
-}
-
-a {
-    color: #42b983;
+.qrs {
+  text-align: center;
 }
 </style>

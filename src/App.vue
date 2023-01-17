@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <qrGenerate msg="QR GENERATOR"/>
+    <qrGenerate msg="QR TEAMS"/>
   </div>
 </template>
 
