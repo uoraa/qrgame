@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "core-js": "^3.8.3",
+    "cosmicjs": "^4.3.1",
     "vue": "^2.7",
     "vue-qr": "^4.0.9"
   },
