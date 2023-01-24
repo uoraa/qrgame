@@ -1,13 +1,12 @@
 <template>
   <div id="app">
-    <b-button @click="saveCosmicData()">Initiate</b-button>
     <qrGenerate msg="QR TEAMS" :data="getTeams" v-if="qrDisplay" />
   </div>
 </template>
 
 <script>
 import qrGenerate from "./components/qr.vue";
-import { bucket } from "./cosmic.js";
+// import { bucket } from "./cosmic.js";
 import store from "./store/store";
 
 export default {
@@ -21,39 +20,38 @@ export default {
     qrDisplay: false,
   }),
   methods: {
-    fetchPosts() {
-      return bucket.getObjects({
-        type: "Team",
-        props: "slug,title,metadata",
-      });
-    },
-    findSlug(slug) {
-      return this.posts.find((item) => {
-        return item.slug === slug;
-      });
-    },
-    extractFirstObject(objects) {
-      if (objects.objects == null) return void 0;
-      else return objects.objects[0];
-    },
-    saveCosmicData() {
-      var payload = this.findSlug("team");
-      store.dispatch("update_data", payload.metadata).then(() => {
-        this.qrDisplay = true;
-      });
-    },
+    // saved for reference
+    // fetchPosts() {
+    //   return bucket.getObjects({
+    //     type: "Team",
+    //     props: "slug,title,metadata",
+    //   });
+    // },
+    // findSlug(slug) {
+    //   return this.posts.find((item) => {
+    //     return item.slug === slug;
+    //   });
+    // },
+    // saveCosmicData() {
+    //   var payload = this.findSlug("team");
+    //   store.dispatch("update_data", payload.metadata).then(() => {
+    //     this.qrDisplay = true;
+    //   });
+    // },
   },
   computed: {
     getTeams() {
-      return store.state.data.teamarray;
+      return store.state.data;
     },
   },
   created() {
     document.body.classList.add("loading");
-    Promise.all([this.fetchPosts()]).then(([posts]) => {
-      this.posts = posts.objects;
+    Promise.all([store.dispatch("intialize")]).then(() => {
       this.isLoaded = true;
-      this.$nextTick(() => document.body.classList.remove("loading"));
+      this.$nextTick(() => {
+        document.body.classList.remove("loading");
+        this.qrDisplay = true;
+      });
     });
   },
 };
