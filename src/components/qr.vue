@@ -1,7 +1,6 @@
 <template>
   <div>
-    <h1>{{ msg }}</h1>
-    <span v-for="team in data.metadata.teamarray" :key="team.id" class="qrs">
+    <span v-for="team in data" :key="team.id" class="qrs">
       {{ team.name }}
       <br />
       <vue-qr
@@ -20,11 +19,11 @@
 <script>
 import VueQr from "vue-qr";
 export default {
-  components: { VueQr },
+components: { VueQr },
   name: "qrGenerate",
   props: {
     msg: String,
-    data: Object,
+    data: Array,
   },
   data() {
     return {
@@ -33,6 +32,7 @@ export default {
         margin: 30,
         colorLight: "#ffffff",
       },
+      Teams: () => {return this.getTeams()},
     };
   },
 };
