@@ -1,4 +1,4 @@
-# qrgame
+# qrgame (WIP)
 
 ### Compiles and hot-reloads for development
 ```
